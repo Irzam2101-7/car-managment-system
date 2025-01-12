@@ -32,7 +32,7 @@ class AuthController extends BaseController {
   
         ResponseBuilder.success(res, userResponse, 'Signup successful!');
       } catch (error) {
-        logger.error('Error in signup:', { error });
+        logger.error('Error in signup:', JSON.stringify(error));
         this.handleError(res, error);
       }
     }
@@ -67,8 +67,45 @@ class AuthController extends BaseController {
         this.handleError(res, error);
       }
     }
+
+    async refreshToken(req: Request, res: Response): Promise<void> {
+      try {
+        const { refreshToken } = req.body;
+    
+        // Check if refresh token exists
+        if (!refreshToken) {
+          return ResponseBuilder.error(res, 400, 'Refresh token is required');
+        }
+    
+        // Get JWT_SECRET from environment
+        const JWT_SECRET = process.env.JWT_SECRET;
+        if (!JWT_SECRET) {
+          throw new Error('JWT_SECRET is not defined');
+        }
+    
+        // Verify the refresh token
+        const decoded = jwt.verify(refreshToken, JWT_SECRET) as jwt.JwtPayload; // Type assertion here
+    
+        const userId = decoded.userId;
+        if (!userId) {
+          return ResponseBuilder.error(res, 401, 'Invalid refresh token');
+        }
+    
+        const user = await UserModel.findById(userId);
+        if (!user) {
+          return ResponseBuilder.error(res, 401, 'User not found');
+        }
+    
+        // Generate new access token
+        const newAccessToken = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '2d' });
+        
+        ResponseBuilder.success(res, { accessToken: newAccessToken }, 'New access token generated!');
+      } catch (error) {
+        logger.error('Error refreshing token:', error);
+        ResponseBuilder.error(res, 500, 'Something went wrong while refreshing token');
+      }
   }
-  
+}
 
 export const authController = new AuthController();
 

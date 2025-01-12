@@ -11,7 +11,7 @@ const router = Router();
  * @desc    Add a new category
  * @access  Private
  */
-router.post('/', authenticate, validateRequest(carCategoryValidationSchema), (req, res) => categoryController.createCategory(req, res));
+router.post('/add', authenticate, validateRequest(carCategoryValidationSchema), (req, res) => categoryController.createCategory(req, res));
 
 /**
  * @route   GET /category

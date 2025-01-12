@@ -35,9 +35,6 @@ const userSchema: Schema<IUser> = new Schema(
   }
 );
 
-// Add an index for faster queries on email
-userSchema.index({ email: 1 });
-
 // Mongoose Model
 const User: Model<IUser> = mongoose.model<IUser>("User", userSchema);
 

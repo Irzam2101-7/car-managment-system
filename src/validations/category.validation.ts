@@ -6,8 +6,5 @@ export const carCategoryValidationSchema = Joi.object({
       "string.min": "Category name must be at least 3 characters.",
       "string.max": "Category name must not exceed 50 characters.",
     }),
-    createdBy: Joi.string().required().messages({
-      "string.empty": "CreatedBy field is required.",
-    }),
   });
   

@@ -19,4 +19,11 @@ router.post('/signup', validateRequest(signupSchema), (req, res) => authControll
  */
 router.post('/login', validateRequest(loginSchema), (req, res) => authController.login(req, res));
 
+/**
+ * @route   POST /auth/refresh-token
+ * @desc    Refresh the access token using a refresh token
+ * @access  Public
+ */
+router.post('/refresh-token', (req, res) => authController.refreshToken(req, res));
+
 export default router;
