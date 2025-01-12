@@ -14,3 +14,8 @@ dist/
 # Optional: Ignore IDE/editor configuration files
 .vscode/
 .idea/
+
+# Ignore log files
+*.log
+logs/
+*.log.*
