@@ -14,7 +14,3 @@ dist/
 # Optional: Ignore IDE/editor configuration files
 .vscode/
 .idea/
-
-# Optional: Ignore OS-generated files
-.DS_Store
-Thumbs.db
