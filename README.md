@@ -15,3 +15,29 @@ Software Requirements:
 
 Node.js: v8 or higher (recommended v14+)
 MongoDB: v3.6 or higher (recommended v4+)
+
+## Environment Variables
+
+- `JWT_SECRET`: Secret key used to sign JWT tokens.
+- `SALT_ROUNDS`: Number of salt rounds for hashing passwords (default is 10).
+- `MONGO_URI`: MongoDB connection string.
+- `EMAIL_USER`: Your email service username.
+- `EMAIL_PASS`: Your email service password.
+
+
+## Dependencies
+
+- `express`: Web framework for Node.js.
+- `mongoose`: MongoDB ORM for Node.js.
+- `bcrypt`: Password hashing.
+- `jsonwebtoken`: For JWT authentication.
+- `nodemailer`: For sending emails.
+
+
+## Deployment
+
+To deploy this project, follow the steps:
+1. Set up environment variables.
+2. Run `npm install` to install dependencies.
+3. Run `npm run build` to build.
+4. Run `npm start` to start the server.
